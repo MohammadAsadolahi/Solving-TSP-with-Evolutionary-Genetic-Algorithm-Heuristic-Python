@@ -1,0 +1,211 @@
+#   solving Travelling salesman(TSP) using ant colony
+#   by mohammad asadolahi
+#   Mohammad.E.Asadolahi@gmail.com
+import math
+import random
+import matplotlib.pyplot as plt
+
+class Draw:
+    def DrawSolutionPlot(self, cities, path: list, gen=""):
+        if gen != "":
+            plt.title(f'Best Path untill Generation:{gen}')
+        x = []
+        y = []
+        for point in cities:
+            x.append(point['x'])
+            y.append(point['y'])
+        plt.plot(x, y, 'co')
+        for route in range(1, len(path)):
+            source = path[route - 1]
+            destination = path[route]
+            plt.arrow(x[source], y[source], x[destination] - x[source], y[destination] - y[source], color='r',
+                      length_includes_head=True)
+        plt.xlim(0, max(x) * 1.1)
+        plt.ylim(0, max(y) * 1.1)
+        plt.show()
+
+class Route:
+    def __init__(self, solution,cost):
+        self.solution = solution
+        self.cost = cost
+
+    def __lt__(self, other):
+        return self.cost < other.cost
+
+    def updateClashCount(self,cost):
+        self.cost = cost
+
+
+class GeneticSolver:
+    def __init__(self, populationSize, generationCount, mutationRate, cities,citycCount):
+        self.populationSize = populationSize
+        self.generationCount = generationCount
+        self.mutationRate = mutationRate
+        self.citycCount = citycCount
+        self.cities=cities
+        self.population = []
+        self.elitePopulation = []
+        self.generationAverage = []
+        self.initialPopulation()
+        self.printPopulation()
+
+    def getDistance(self, city1: int, city2: int):
+        return math.sqrt((self.cities[city1]['x'] - self.cities[city2]['x']) ** 2 + (self.cities[city1]['y'] - self.cities[city2]['y']) ** 2)
+
+    def getRouteCost(self, route: list):
+        totalRouteCost = 0
+        for case in range(1, len(route)):
+            source = route[case - 1]
+            destination = route[case]
+            totalRouteCost += self.getDistance(source,destination)
+        return totalRouteCost
+
+    def initialPopulation(self):
+        index = 0
+        while index < self.populationSize:
+            solution = [i for i in range(1,self.citycCount+1)]
+            while self.isSolutionExists(self.population, solution):
+                random.shuffle(solution)
+            self.population.append(Route(solution,self.getRouteCost(solution)))
+            index+=1
+        self.population.sort(key=lambda route: route.cost)
+        self.elitePopulation.append(self.population[0])
+        self.generationAverage.append((sum(x.cost for x in self.population)) / self.populationSize)
+    def isSolutionExists(self, population, route):
+        for gene in population:
+            if gene.solution == route:
+                return True
+        return False
+    def printPopulation(self):
+        for route in self.population:
+            print(f"{route.solution} with count of {route.cost} clashes")
+
+    def printElitePopulation(self):
+        generation = 0
+        print("******************************************************************************************")
+        print(f"printing elite chromosomes of all generations")
+        for chromosome in self.elitePopulation:
+            print(
+                f"elite chromosome of generation:{generation} is: {chromosome.solution} with count of {chromosome.ClashCount} clasehs.")
+            generation += 1
+        print("******************************************************************************************")
+
+    def mutate(self, population, chromosome):
+        tmpChromosome = Chromosome(chromosome.solution[::])
+        while self.isChromosomeExist(population, tmpChromosome):
+            firstMutationPosition = random.randint(0, len(tmpChromosome.solution) - 1)
+            tmpChromosome.solution[mutationIndex] = mutationChange
+        chromosome.solution = tmpChromosome.solution[::]
+        chromosome.updateClashCount()
+    # def mutateBySwap(self, population, chromosome):
+    #     tmpChromosome = Chromosome(chromosome.solution[::])
+    #
+    #     while self.isChromosomeExist(population, tmpChromosome):
+    #         mutationIndex1 = random.randint(0, len(tmpChromosome.solution) - 1)
+    #         mutationIndex2 = random.randint(0, len(tmpChromosome.solution) - 1)
+    #         if(mutationIndex1!=mutationIndex2):
+    #             temp=tmpChromosome.solution[mutationIndex1]
+    #             tmpChromosome.solution[mutationIndex1]=tmpChromosome.solution[mutationIndex2]
+    #             tmpChromosome.solution[mutationIndex2]=temp
+    #     chromosome.solution = tmpChromosome.solution[::]
+    #     chromosome.updateClashCount()
+    #
+
+    #
+    # def solve(self):
+    #     self.lunchEvolution()
+    #     plt.plot([x.ClashCount for x in self.elitePopulation], label="Elites")
+    #     plt.xlabel('x - Generations')
+    #     plt.ylabel('y - Clashes ')
+    #     plt.title('Evolution of elite chromosomes')
+    #     plt.show()
+    #
+    #     plt.plot([x for x in self.generationAverage], label="Average clashes")
+    #     plt.title('Averge clashes of each generatins')
+    #     plt.xlabel('x - Generations')
+    #     plt.ylabel('y - Clashes ')
+    #     plt.show()
+    #
+    #     plt.plot([x.ClashCount for x in self.elitePopulation], label="Elites")
+    #     plt.xlabel('x - Generations')
+    #     plt.ylabel('y - Clashes ')
+    #     plt.title('Evolution of elite chromosomes')
+    #     plt.legend()
+    #     plt.plot([x for x in self.generationAverage], label="Average clashes")
+    #     plt.xlabel('x - Generations')
+    #     plt.ylabel('y - Clashes ')
+    #     plt.title('Averge clashes of each generatins')
+    #     plt.legend()
+    #     plt.show()
+    #
+    #     image = np.ones(self.boardSize * self.boardSize)
+    #     image = image.reshape((self.boardSize, self.boardSize))
+    #     line = []
+    #     index = 0
+    #     for i in self.elitePopulation.pop().solution:
+    #         line = []
+    #         for j in range(1, self.boardSize + 1):
+    #             if i == j:
+    #                 line.append(0)
+    #             else:
+    #                 line.append(1)
+    #         image[index] = line
+    #         index += 1
+    #     row_labels = range(1, self.boardSize+1)
+    #     col_labels = range(1, self.boardSize+1)
+    #     plt.matshow(image)
+    #     plt.xticks(range(self.boardSize), col_labels)
+    #     plt.yticks(range(self.boardSize), row_labels)
+    #     plt.show()
+    #
+    # def lunchEvolution(self):
+    #     generation = 0
+    #     while generation < self.generationCount:
+    #         for chromosome in self.population:
+    #             if chromosome.ClashCount == 0:
+    #                 self.elitePopulation.append(chromosome)
+    #                 print(
+    #                     f"an absolute solution found in generation:{generation} arrange: {chromosome.solution} whith zero clash")
+    #                 return
+    #         print("******************************************************************************************")
+    #         print(f"generation: {generation}")
+    #         newPopulation = self.population[::]
+    #         crossoverIndex = 0
+    #         while crossoverIndex < self.populationSize:
+    #             firstChildPprobability = random.randint(0, 100)
+    #             secondChildPprobability = random.randint(0, 100)
+    #             child1 = Chromosome(
+    #                 self.crossOver(self.population[crossoverIndex], self.population[crossoverIndex + 1]))
+    #             if (firstChildPprobability < self.mutationRate) or self.isChromosomeExist(newPopulation, child1):
+    #                 self.mutate(newPopulation, child1)
+    #             newPopulation.append(child1)
+    #             child2 = Chromosome(
+    #                 self.crossOver(self.population[crossoverIndex + 1], self.population[crossoverIndex]))
+    #             if (secondChildPprobability < self.mutationRate) or self.isChromosomeExist(newPopulation, child2):
+    #                 self.mutate(newPopulation, child2)
+    #             newPopulation.append(child2)
+    #             crossoverIndex += 2
+    #         newPopulation.sort(key=lambda chromosome: chromosome.ClashCount)
+    #         self.population.clear()
+    #         self.population = newPopulation[0:self.populationSize]
+    #         self.elitePopulation.append(self.population[0])
+    #         self.generationAverage.append((sum(x.ClashCount for x in self.population)) / self.populationSize)
+    #         print(
+    #             f"the best arrange of generation: {generation} is{self.elitePopulation[generation].solution} "
+    #             f"wit" f"h {self.elitePopulation[generation].ClashCount} clashes")
+    #         print(
+    #             f"the average clashes of generation: {generation} is{self.generationAverage[generation]} ")
+    #         self.printPopulation()
+    #         generation += 1
+
+cities = {}
+cityCount = 0
+with open('./Cities List.txt') as f:
+    for line in f.readlines():
+        city = line.split(' ')
+        cities[int(city[0])]={}
+        cities[int(city[0])]['x']=int(city[1])
+        cities[int(city[0])]['y']=int(city[2])
+        cityCount += 1
+# populationSize, generationCount, mutationRate in %, cities ,cityCount
+boardSolver = GeneticSolver(50,50, 10,cities,cityCount)
