@@ -6,19 +6,19 @@ import random
 import matplotlib.pyplot as plt
 
 class Draw:
-    def DrawSolutionPlot(self, cities, path: list, gen=""):
-        if gen != "":
-            plt.title(f'Best Path untill Generation:{gen}')
+    def DrawSolutionPlot(self, cities, path: list, info):
+        if info != "":
+            plt.title(f'Best Path untill Generation:{info}')
         x = []
         y = []
         for point in cities:
             x.append(cities[point]['x'])
             y.append(cities[point]['y'])
         plt.plot(x, y, 'co')
-        for route in range(1, len(path)-1):
+        for route in range(1, len(path)):
             source = path[route - 1]
             destination = path[route]
-            plt.arrow(x[source], y[source], x[destination] - x[source], y[destination] - y[source], color='r',
+            plt.arrow(cities[source]['x'], cities[source]['y'], cities[destination]['x'] - cities[source]['x'] , cities[destination]['y'] - cities[source]['y'], color='r',
                       length_includes_head=True)
         plt.xlim(0, max(x) * 1.1)
         plt.ylim(0, max(y) * 1.1)
@@ -44,13 +44,12 @@ class GeneticSolver:
         self.elitePopulation = []
         self.generationAverage = []
         self.initialPopulation()
-        self.printPopulation()
-        self.drawChromosome(self.population[0])
+        # self.printPopulation()
 
-
-    def drawChromosome(self,chromosome):
+    def drawChromosome(self,chromosome,generation):
         self.draw.DrawSolutionPlot(self.cities, chromosome.solution,
-                                   f" with cost: {self.chromosome.cost}")
+                                   f"{generation} with cost: {chromosome.cost}")
+
     def getDistance(self, city1: int, city2: int):
         return math.sqrt((self.cities[city1]['x'] - self.cities[city2]['x']) ** 2 + (self.cities[city1]['y'] - self.cities[city2]['y']) ** 2)
 
@@ -73,11 +72,13 @@ class GeneticSolver:
         self.population.sort(key=lambda route: route.cost)
         self.elitePopulation.append(self.population[0])
         self.generationAverage.append((sum(x.cost for x in self.population)) / self.populationSize)
+
     def isSolutionExists(self, population, route):
         for gene in population:
             if gene.solution == route:
                 return True
         return False
+
     def printPopulation(self):
         for route in self.population:
             print(f"Route: {route.solution}   with Cost of: {route.cost}   ")
@@ -97,7 +98,6 @@ class GeneticSolver:
         while self.isSolutionExists(population, tmpChromosome.solution):
             mutationIndex1 = random.randint(0, len(tmpChromosome.solution) - 1)
             mutationIndex2 = random.randint(0, len(tmpChromosome.solution) - 1)
-            print(f"{mutationIndex1},   {mutationIndex2}")
             if(mutationIndex1!=mutationIndex2):
                 temp=tmpChromosome.solution[mutationIndex1]
                 tmpChromosome.solution[mutationIndex1]=tmpChromosome.solution[mutationIndex2]
@@ -105,75 +105,49 @@ class GeneticSolver:
         chromosome.solution = tmpChromosome.solution[::]
         chromosome.cost=self.getRouteCost(chromosome.solution)
 
+    def crossOver(self,firstChromosome,secondChromosome):
+        index=random.randint(0,len(firstChromosome.solution))
+        firstRoute=firstChromosome.solution[0:index]+secondChromosome.solution[index:len(firstChromosome.solution)]
+        secondRoute = secondChromosome.solution[0:index] + firstChromosome.solution[index:len(firstChromosome.solution)]
+        firstChild=Chromosome(firstRoute,self.getRouteCost(firstRoute))
+        secondChild = Chromosome(secondRoute, self.getRouteCost(secondRoute))
+        if (self.mutationRate > random.random()):
+            self.applyMutation(self.population, firstChild)
+        if (self.mutationRate > random.random()):
+            self.applyMutation(self.population, secondChild)
+        return firstChild,secondChild
+
     def solve(self):
         self.lunchEvolution()
         plt.plot([x.cost for x in self.elitePopulation], label="Elites")
         plt.xlabel('x - Generations')
-        plt.ylabel('y - Clashes ')
+        plt.ylabel('y - Cost ')
         plt.title('Evolution of elite chromosomes')
         plt.show()
-
-        plt.plot([x for x in self.generationAverage], label="Average clashes")
-        plt.title('Averge clashes of each generatins')
+        plt.plot([x for x in self.generationAverage], label="Average Cost")
+        plt.title('Averge Cost of each generatins')
         plt.xlabel('x - Generations')
-        plt.ylabel('y - Clashes ')
+        plt.ylabel('y - Cost ')
         plt.show()
-
-        plt.plot([x.cost for x in self.elitePopulation], label="Elites")
-        plt.xlabel('x - Generations')
-        plt.ylabel('y - Clashes ')
-        plt.title('Evolution of elite chromosomes')
-        plt.legend()
-        plt.plot([x for x in self.generationAverage], label="Average clashes")
-        plt.xlabel('x - Generations')
-        plt.ylabel('y - Clashes ')
-        plt.title('Averge clashes of each generatins')
-        plt.legend()
-        plt.show()
-
 
     def lunchEvolution(self):
         generation = 0
         while generation < self.generationCount:
-            for chromosome in self.population:
-                if chromosome.ClashCount == 0:
-                    self.elitePopulation.append(chromosome)
-                    print(
-                        f"an absolute solution found in generation:{generation} arrange: {chromosome.solution} whith zero clash")
-                    return
-            print("******************************************************************************************")
-            print(f"generation: {generation}")
-            newPopulation = self.population[::]
-            crossoverIndex = 0
-            while crossoverIndex < self.populationSize:
-                firstChildPprobability = random.randint(0, 100)
-                secondChildPprobability = random.randint(0, 100)
-                child1 = Chromosome(
-                    self.crossOver(self.population[crossoverIndex], self.population[crossoverIndex + 1]))
-                if (firstChildPprobability < self.mutationRate) or self.isChromosomeExist(newPopulation, child1):
-                    self.mutate(newPopulation, child1)
-                newPopulation.append(child1)
-                child2 = Chromosome(
-                    self.crossOver(self.population[crossoverIndex + 1], self.population[crossoverIndex]))
-                if (secondChildPprobability < self.mutationRate) or self.isChromosomeExist(newPopulation, child2):
-                    self.mutate(newPopulation, child2)
-                newPopulation.append(child2)
-                crossoverIndex += 2
-            newPopulation.sort(key=lambda chromosome: chromosome.ClashCount)
+            newPopulation=self.population[::]
+            for index in range(0,self.populationSize,2):
+                firstChild,secondChild=self.crossOver(self.population[index],self.population[index+1])
+                newPopulation.append(firstChild)
+                newPopulation.append(secondChild)
+            newPopulation.sort(key=lambda chromosome: chromosome.cost)
             self.population.clear()
             self.population = newPopulation[0:self.populationSize]
             self.elitePopulation.append(self.population[0])
-            self.generationAverage.append((sum(x.ClashCount for x in self.population)) / self.populationSize)
-            print(
-                f"the best arrange of generation: {generation} is{self.elitePopulation[generation].solution} "
-                f"wit" f"h {self.elitePopulation[generation].ClashCount} clashes")
-            print(
-                f"the average clashes of generation: {generation} is{self.generationAverage[generation]} ")
-            self.printPopulation()
+            self.generationAverage.append((sum(x.cost for x in self.population)) / self.populationSize)
             generation += 1
-            if (generation % 10) == 0:
-                self.draw.DrawSolutionPlot(self.cities, self.population[0].solution,
-                                           f"{generation} with cost: {self.population[0].cost}")
+            if ((generation + 1) % 200) == 0:
+                self.drawChromosome(self.population[0],generation+1)
+
+
 cities = {}
 cityCount = 0
 with open('./Cities List.txt') as f:
@@ -186,4 +160,5 @@ with open('./Cities List.txt') as f:
 
 
 # populationSize, generationCount, mutationRate in %, cities ,cityCount
-boardSolver = GeneticSolver(50,50, 10,cities,cityCount)
+geneticSolver = GeneticSolver(100,1000, 0.1,cities,cityCount)
+geneticSolver.solve()
