@@ -83,16 +83,6 @@ class GeneticSolver:
         for route in self.population:
             print(f"Route: {route.solution}   with Cost of: {route.cost}   ")
 
-    def printElitePopulation(self):
-        generation = 0
-        print("******************************************************************************************")
-        print(f"printing elite chromosomes of all generations")
-        for chromosome in self.elitePopulation:
-            print(
-                f"elite chromosome of generation:{generation} is: {chromosome.solution} with count of {chromosome.cost} clasehs.")
-            generation += 1
-        print("******************************************************************************************")
-
     def applyMutation(self, population, chromosome):
         tmpChromosome = Chromosome(chromosome.solution[::],chromosome.cost)
         while self.isSolutionExists(population, tmpChromosome.solution):
@@ -104,6 +94,7 @@ class GeneticSolver:
                 tmpChromosome.solution[mutationIndex2]=temp
         chromosome.solution = tmpChromosome.solution[::]
         chromosome.cost=self.getRouteCost(chromosome.solution)
+        
     def validateChromosome(self,chromosome):
         citiesList=[i for i in range(1,self.cityCount+1)]
         toReplace=[]
@@ -161,7 +152,8 @@ class GeneticSolver:
             generation += 1
             if ((generation + 1) % 20) == 0:
                 self.drawChromosome(self.population[0],generation+1)
-
+                print(self.population[0].solution,self.population[0].cost)
+                # self.printPopulation()
 
 cities = {}
 cityCount = 0
