@@ -159,8 +159,8 @@ class GeneticSolver:
             self.elitePopulation.append(self.population[0])
             self.generationAverage.append((sum(x.cost for x in self.population)) / self.populationSize)
             generation += 1
-            # if ((generation + 1) % 20) == 0:
-            #     self.drawChromosome(self.population[0],generation+1)
+            if ((generation + 1) % 20) == 0:
+                self.drawChromosome(self.population[0],generation+1)
 
 
 cities = {}
