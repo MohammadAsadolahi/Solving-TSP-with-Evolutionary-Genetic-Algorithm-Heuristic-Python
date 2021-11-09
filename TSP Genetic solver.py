@@ -38,7 +38,7 @@ class GeneticSolver:
         self.populationSize = populationSize
         self.generationCount = generationCount
         self.mutationRate = mutationRate
-        self.citycCount = citycCount
+        self.cityCount = citycCount
         self.cities=cities
         self.population = []
         self.elitePopulation = []
@@ -64,7 +64,7 @@ class GeneticSolver:
     def initialPopulation(self):
         index = 0
         while index < self.populationSize:
-            solution = [i for i in range(1,self.citycCount+1)]
+            solution = [i for i in range(1,self.cityCount+1)]
             while self.isSolutionExists(self.population, solution):
                 random.shuffle(solution)
             self.population.append(Chromosome(solution,self.getRouteCost(solution)))
@@ -104,6 +104,20 @@ class GeneticSolver:
                 tmpChromosome.solution[mutationIndex2]=temp
         chromosome.solution = tmpChromosome.solution[::]
         chromosome.cost=self.getRouteCost(chromosome.solution)
+    def validateChromosome(self,chromosome):
+        citiesList=[i for i in range(1,self.cityCount+1)]
+        toReplace=[]
+        for i in citiesList:
+            if i not in chromosome.solution:
+                toReplace.append(i)
+        validRoute=[]
+        for i in chromosome.solution:
+            if i not in validRoute:
+                validRoute.append(i)
+            else:
+                validRoute.append(toReplace.pop())
+        return Chromosome(validRoute,self.getRouteCost(validRoute))
+
 
     def crossOver(self,firstChromosome,secondChromosome):
         index=random.randint(0,len(firstChromosome.solution))
@@ -115,7 +129,7 @@ class GeneticSolver:
             self.applyMutation(self.population, firstChild)
         if (self.mutationRate > random.random()):
             self.applyMutation(self.population, secondChild)
-        return firstChild,secondChild
+        return self.validateChromosome(firstChild),self.validateChromosome(secondChild)
 
     def solve(self):
         self.lunchEvolution()
@@ -131,6 +145,7 @@ class GeneticSolver:
         plt.show()
 
     def lunchEvolution(self):
+        self.drawChromosome(self.population[0],0)
         generation = 0
         while generation < self.generationCount:
             newPopulation=self.population[::]
@@ -144,8 +159,8 @@ class GeneticSolver:
             self.elitePopulation.append(self.population[0])
             self.generationAverage.append((sum(x.cost for x in self.population)) / self.populationSize)
             generation += 1
-            if ((generation + 1) % 200) == 0:
-                self.drawChromosome(self.population[0],generation+1)
+            # if ((generation + 1) % 20) == 0:
+            #     self.drawChromosome(self.population[0],generation+1)
 
 
 cities = {}
@@ -160,5 +175,5 @@ with open('./Cities List.txt') as f:
 
 
 # populationSize, generationCount, mutationRate in %, cities ,cityCount
-geneticSolver = GeneticSolver(100,1000, 0.1,cities,cityCount)
+geneticSolver = GeneticSolver(50,200, 0.3,cities,cityCount)
 geneticSolver.solve()
