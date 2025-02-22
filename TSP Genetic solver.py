@@ -1,6 +1,4 @@
 #   Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python
-#   by mohammad asadolahi
-#   Mohammad.E.Asadolahi@gmail.com
 import math
 import random
 import matplotlib.pyplot as plt
