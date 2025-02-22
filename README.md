@@ -13,22 +13,22 @@ Average plot of all generations:
 All best route of genereations  
 ![Elite chromosome(routes) cost among all generations](https://user-images.githubusercontent.com/79268727/140981071-a55cec9b-2a46-466b-b983-99a07ed7da96.png)  
 ### route at iteration of 0(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 0 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%200%20iteration.png)  
+![iteration 0 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%200%20iteration.png)  
 ### route found by algorithm at iteration of 20(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 20 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2020%20iterations.png)  
+![iteration 20 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2020%20iterations.png)  
 ### route found by algorithm at iteration of 40(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 40 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2040%20iterations.png)  
+![iteration 40 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2040%20iterations.png)  
 ### route found by algorithm at iteration of 60(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 60 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2060%20iterations.png)  
+![iteration 60 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2060%20iterations.png)  
 ### route found by algorithm at iteration of 80(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 80 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2080%20iterations.png)  
+![iteration 80 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2080%20iterations.png)  
 ### route found by algorithm at iteration of 100(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 100 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20100%20iterations.png)  
+![iteration 100 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20100%20iterations.png)  
 ### route found by algorithm at iteration of 120(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 120 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20120%20iterations.png)  
+![iteration 120 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20120%20iterations.png)  
 ### route found by algorithm at iteration of 140(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 140 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20140%20iterations.png)  
+![iteration 140 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20140%20iterations.png)  
 ### route found by algorithm at iteration of 160(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 160 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20160%20iterations.png)  
+![iteration 160 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20160%20iterations.png)  
 ### route found by algorithm at iteration of 180(feeding algorithm with list of 20 city euclidean coordinates: x,y from 0 to 1000 ):
-![iteration 180 solution](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20180%20iterations.png) 
+![iteration 180 solution](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20180%20iterations.png) 
