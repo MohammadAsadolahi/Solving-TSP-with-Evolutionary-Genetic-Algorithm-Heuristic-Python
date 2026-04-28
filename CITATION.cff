@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Solving TSP with Evolutionary Genetic Algorithm Heuristic"
+type: software
+authors:
+  - name: "AG"
+    affiliation: "Google"
+date-released: "2021-11-01"
+url: "https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python"
+repository-code: "https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python"
+license: MIT
+keywords:
+  - travelling-salesman-problem
+  - genetic-algorithm
+  - evolutionary-computation
+  - combinatorial-optimization
+  - metaheuristic
+  - python
+  - NP-hard
+abstract: >-
+  A Python implementation of a Genetic Algorithm for solving the Travelling
+  Salesman Problem (TSP). Features include single-point crossover with repair
+  operator, swap mutation, elitist (mu+lambda) selection, and real-time
+  matplotlib visualization of evolutionary convergence across generations.
