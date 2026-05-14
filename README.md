@@ -12,7 +12,7 @@
 
 *A high-performance evolutionary solver for the classical Travelling Salesman Problem, demonstrating the power of bio-inspired computation in tackling intractable combinatorial search spaces.*
 
-**Author:** Chief AI Officer @ Google
+**Author:** Mohammad Asadolahi — Senior Agentic AI Engineer | Agentic AI Architectures In The Wild
 
 ---
 
@@ -192,34 +192,34 @@ The solver captures route snapshots every 20 generations, illustrating the progr
 <summary><b>Click to expand full evolutionary timeline (Generation 0 → 180)</b></summary>
 
 #### Generation 0 — Random Initialization
-![Generation 0](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%200%20iteration.png)
+![Generation 0](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%200%20iteration.png)
 
 #### Generation 20 — Early Exploration
-![Generation 20](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2020%20iterations.png)
+![Generation 20](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2020%20iterations.png)
 
 #### Generation 40 — Structure Emerging
-![Generation 40](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2040%20iterations.png)
+![Generation 40](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2040%20iterations.png)
 
 #### Generation 60 — Exploitation Phase Begins
-![Generation 60](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2060%20iterations.png)
+![Generation 60](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2060%20iterations.png)
 
 #### Generation 80 — Crossing Edges Eliminated
-![Generation 80](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2080%20iterations.png)
+![Generation 80](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%2080%20iterations.png)
 
 #### Generation 100 — Approaching Local Optima
-![Generation 100](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20100%20iterations.png)
+![Generation 100](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20100%20iterations.png)
 
 #### Generation 120 — Fine-Tuning
-![Generation 120](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20120%20iterations.png)
+![Generation 120](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20120%20iterations.png)
 
 #### Generation 140 — Near-Optimal Region
-![Generation 140](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20140%20iterations.png)
+![Generation 140](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20140%20iterations.png)
 
 #### Generation 160 — Convergence
-![Generation 160](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20160%20iterations.png)
+![Generation 160](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20160%20iterations.png)
 
 #### Generation 180 — Final Solution
-![Generation 180](https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20180%20iterations.png)
+![Generation 180](https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python/blob/main/Best%20solution%20found%20at%20180%20iterations.png)
 
 </details>
 
@@ -235,7 +235,7 @@ The solver captures route snapshots every 20 generations, illustrating the progr
 ### Installation
 
 ```bash
-git clone https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python.git
+git clone https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python.git
 cd Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python
 pip install -r requirements.txt
 ```
@@ -334,9 +334,9 @@ If you use this work in research or academic publications, please cite:
 ```bibtex
 @software{tsp_genetic_solver,
   title     = {Solving TSP with Evolutionary Genetic Algorithm Heuristic},
-  author    = {AG},
+  author    = {Mohammad Asadolahi},
   year      = {2021},
-  url       = {https://github.com/Elktrn/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python},
+  url       = {https://github.com/MohammadAsadolahi/Solving-TSP-with-Evolutionary-Genetic-Algorithm-Heuristic-Python},
   note      = {A Python implementation of genetic algorithms for the Travelling Salesman Problem}
 }
 ```
@@ -353,6 +353,6 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 *Built with a deep appreciation for the elegance of evolutionary computation and the enduring beauty of NP-hard problems.*
 
-**Chief AI Officer @ Google**
+**Mohammad Asadolahi — Senior Agentic AI Engineer | Agentic AI Architectures In The Wild**
 
 </div>
